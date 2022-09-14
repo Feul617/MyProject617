@@ -27,3 +27,5 @@ while y < 500:
     turtle.pendown()
     turtle.forward(500)
     y += 100
+
+turtle.exitonclick()
