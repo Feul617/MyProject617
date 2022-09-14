@@ -32,5 +32,5 @@ turtle.penup()
 turtle.goto(500, 500)
 turtle.setheading(0)
 
-turtle.exitonclick()
+turtle.exitonclick() 
 
