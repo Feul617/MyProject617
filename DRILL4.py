@@ -29,3 +29,4 @@ while y < 500:
     y += 100
 
 turtle.exitonclick()
+
