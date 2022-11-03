@@ -3,7 +3,7 @@
 # layer 1: Frontground Objects
 
 
-objects = [[], []]
+objects = [[], [], []]
 
 
 def add_object(o, depth):

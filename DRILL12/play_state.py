@@ -3,7 +3,7 @@ import game_framework
 import game_world
 
 from grass import Grass
-from boy import Boy
+from DRILL12 import Boy
 
 
 boy = None
@@ -24,9 +24,11 @@ def handle_events():
 def enter():
     global boy, grass
     boy = Boy()
-    grass = Grass()
+    grass = [Grass() for i in range(2)]
+    grass[1].y = 50
     game_world.add_object(boy, 1)
-    game_world.add_object(grass, 0)
+    game_world.add_object(grass[0], 2)
+    game_world.add_object(grass[1], 0)
 
 # 종료
 def exit():
