@@ -1,4 +1,7 @@
 from pico2d import *
+import game_world
+
+from ball import Ball
 
 
 #1 : 이벤트 정의
@@ -59,6 +62,8 @@ class RUN:
     def exit(self, event):
         print('EXIT RUN')
         self.face_dir = self.dir
+        if event == SPACE:
+            self.fire_ball()
 
     def do(self):
         self.frame = (self.frame + 1) % 8
@@ -98,9 +103,8 @@ class SLEEP:
 next_state = {
     IDLE:  {RU: RUN,  LU: RUN,  RD: RUN,  LD: RUN, TIMER: SLEEP, SPACE: IDLE},
     RUN:   {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, SPACE: RUN},
-    SLEEP: {RU: RUN, LU: RUN, RD: RUN, LD: RUN}
+    SLEEP: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, SPACE: SLEEP}
 }
-
 
 
 
@@ -118,12 +122,14 @@ class Boy:
         self.cur_state = IDLE
         self.cur_state.enter(self, None)
 
+
+
     def update(self):
         self.cur_state.do(self)
 
         if self.event_que:
             event = self.event_que.pop()
-            self.cur_state.exit(self)
+            self.cur_state.exit(self, event)
             try:
                 self.cur_state = next_state[self.cur_state][event]
             except KeyError:
@@ -144,4 +150,6 @@ class Boy:
             self.add_event(key_event)
 
     def fire_ball(self):
-        print('fire ball')
+        #발사 시점에서 공을 생성해줘야 한다.
+        ball = Ball(self.x, self.y, self.face_dir * 3)
+        game_world.add_object(ball, 1)
