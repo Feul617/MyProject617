@@ -36,6 +36,7 @@ class IDLE:
 
     @staticmethod
     def do(self):
+        print(self.frame)
         self.frame = (self.frame + FRAME_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         self.timer -= 1
         if self.timer == 0:
